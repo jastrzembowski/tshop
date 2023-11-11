@@ -8,6 +8,9 @@ export interface Item {
   active: boolean;
 }
 export interface ItemParams {
+  searchString: string;
   currentPage: number;
   itemsPerPage: number;
+  promo?: boolean;
+  active?: boolean;
 }

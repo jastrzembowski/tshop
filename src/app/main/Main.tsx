@@ -9,6 +9,7 @@ import ItemCard from "./ItemCard";
 import "./main.scss";
 import { Grid } from "@mui/material";
 import AppPagination from "../components/AppPagination";
+import NoItemsError from "../components/NoItemsError";
 
 export default function Main() {
   const dispatch = useAppDispatch();
@@ -21,20 +22,26 @@ export default function Main() {
 
   return (
     <article className="items-container">
-      <Grid container spacing={4}>
-        {products.map((product) => (
-          <Grid key={product.id} item xs={12} sm={6} md={4} lg={3}>
-            <ItemCard product={product} />
+      {products.length > 0 ? (
+        <>
+          <Grid container spacing={4}>
+            {products.map((product) => (
+              <Grid key={product.id} item xs={12} sm={6} md={4} lg={3}>
+                <ItemCard product={product} />
+              </Grid>
+            ))}
           </Grid>
-        ))}
-      </Grid>
-      {metaData && (
-        <AppPagination
-          metaData={metaData}
-          onPageChange={(page: number) =>
-            dispatch(setPageNumber({ currentPage: page }))
-          }
-        />
+          {metaData && (
+            <AppPagination
+              metaData={metaData}
+              onPageChange={(page: number) =>
+                dispatch(setPageNumber({ currentPage: page }))
+              }
+            />
+          )}
+        </>
+      ) : (
+        <NoItemsError />
       )}
     </article>
   );
