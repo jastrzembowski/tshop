@@ -1,0 +1,59 @@
+@import "../../styles/variables.scss";
+
+.items-container {
+  background-color: $gray200;
+  padding: 40px 108px;
+
+  .item-card {
+    display: flex;
+    height: 400px;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 8px;
+    position: relative;
+    h1 {
+      font-size: 18px;
+      line-height: 16px;
+      color: $gray900;
+      font-weight: 600;
+      margin: 16px 16px 8px;
+    }
+    h2{
+        position: absolute;
+        z-index: 2;
+        background-color: $orange;
+        color: #fff;
+        font-size: 14px;
+        padding: 4px 17px 4px 16px;
+        font-weight: 600;
+        top: 16px;
+        margin: 0px;
+    }
+    p {
+      font-size: 14px;
+      line-height: 16px;
+      color: $gray700;
+      font-weight: 600;
+      margin: 8px 16px 16px;
+    }
+    img {
+      height: 170px;
+      object-fit: cover;
+      border-radius: 8px 8px 0px 0px;
+    }
+    button{
+        margin: auto 16px 24px 16px;
+        background-color: $primary-blue;
+        border: 0px;
+        border-radius: 4px;
+        color: white;
+        font-size: 14px;
+        line-height: 16px;
+        padding: 11px 87px;
+    
+    }
+    .btn-disabled{
+        background-color: $gray700;
+    }
+  }
+}
