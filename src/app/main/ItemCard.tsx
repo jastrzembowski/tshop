@@ -31,7 +31,7 @@ export default function ItemCard({ product }: Props) {
 
         }} />
 
-        <button onClick={handleClickOpen} className={!product.active? "" : "btn-disabled"}>Show details</button>
+        <button onClick={handleClickOpen} className={product.active? "" : "btn-disabled"}>Show details</button>
       </div>
       <Dialog open={open} onClose={handleClose}>
         <div className="item-info">

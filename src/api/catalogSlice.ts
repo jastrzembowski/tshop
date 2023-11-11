@@ -17,6 +17,7 @@ interface CatalogState {
 
 function initParams() {
   return {
+    searchString: "",
     currentPage: 1,
     itemsPerPage: 8,
   };
@@ -32,9 +33,12 @@ const productsAdapter = createEntityAdapter<Item>();
 
 function getAxiosParams(itemParams: ItemParams) {
   const params = new URLSearchParams();
+  params.append("search", itemParams.searchString);
   params.append("page", itemParams.currentPage.toString());
   params.append("limit", itemParams.itemsPerPage.toString());
-  // params.append("searchTerm", productParams.searchTerm);
+  itemParams.promo && params.append("promo", itemParams.promo.toString());
+  itemParams.active && params.append("active", itemParams.active.toString());
+
   return params;
 }
 
@@ -44,7 +48,6 @@ export const fetchItemsAsync = createAsyncThunk<
   { state: RootState }
 >("catalog/fetchItemsAsync", async (_, thunkAPI) => {
   const params = getAxiosParams(thunkAPI.getState().catalog.itemParams);
-
   try {
     const response = await axios({
       method: "get",
@@ -66,6 +69,14 @@ export const catalogSlice = createSlice({
   reducers: {
     setMetaData: (state, action) => {
       state.metaData = action.payload;
+    },
+    setProductParams: (state, action) => {
+      state.itemsLoaded = false;
+      state.itemParams = {
+        ...state.itemParams,
+        ...action.payload,
+        pageNumber: 1,
+      };
     },
     setPageNumber: (state, action) => {
       state.itemsLoaded = false;
@@ -91,4 +102,5 @@ export const productSelectors = productsAdapter.getSelectors(
   (state: RootState) => state.catalog
 );
 
-export const { setMetaData, setPageNumber } = catalogSlice.actions;
+export const { setMetaData, setPageNumber, setProductParams } =
+  catalogSlice.actions;
