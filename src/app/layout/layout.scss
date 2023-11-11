@@ -1,4 +1,4 @@
-@import url("../../styles/variables.scss");
+@import "../../styles/variables.scss";
 
 nav {
   height: 144px;
@@ -6,9 +6,12 @@ nav {
   flex-direction: row;
   align-items: center;
   padding: 0px 108px;
-  h1 {
+  a {
     font-size: 24px;
     line-height: 40px;
+    text-decoration: none;
+    color: $gray900;
+    font-weight: 600;
   }
   img {
     width: 48px;

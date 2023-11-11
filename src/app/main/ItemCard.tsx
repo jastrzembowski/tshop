@@ -25,20 +25,27 @@ export default function ItemCard({ product }: Props) {
         <img src={product.image} alt={product.name}></img>
         <h1>{product.name}</h1>
         <p>{product.description}</p>
-        <Rating name="read-only" value={product.rating} readOnly sx={{
-          paddingLeft: "16px",
-          marginTop: "auto"
-
-        }} />
-
-        <button onClick={handleClickOpen} className={product.active? "" : "btn-disabled"}>Show details</button>
+        <Rating
+          name="read-only"
+          value={product.rating}
+          readOnly
+          sx={{
+            paddingLeft: "16px",
+            marginTop: "auto",
+          }}
+        />
+        <button
+          onClick={handleClickOpen}
+          className={product.active ? "" : "btn-disabled"}
+        >
+          Show details
+        </button>
       </div>
       <Dialog open={open} onClose={handleClose}>
         <div className="item-info">
           <img src={product.image} alt={product.name}></img>
           <h1>{product.name}</h1>
           <p>{product.description}</p>
-
         </div>
       </Dialog>
     </>
