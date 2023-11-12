@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { FieldValues } from "react-hook-form";
+import { router } from "../routing/AppRoutes";
 
 interface AccountState {
   user: {
@@ -61,7 +62,12 @@ export const fetchCurrentUser = createAsyncThunk(
 export const accountSlice = createSlice({
   name: "account",
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    logout: (state) => {
+      (state.user = null), localStorage.removeItem("user");
+      router.navigate("/");
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(login.pending, (state) => {
@@ -69,10 +75,25 @@ export const accountSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, action) => {
         state.user = action.payload.data.user;
+        router.navigate("/home");
         state.status = "idle";
       })
       .addCase(login.rejected, (state) => {
         state.status = "idle";
+      })
+      .addCase(fetchCurrentUser.pending, (state) => {
+        state.status = "pendingLogin";
+      })
+      .addCase(fetchCurrentUser.fulfilled, (state, action) => {
+        state.user = action.payload.data;
+        router.navigate("/home");
+        state.status = "idle";
+      })
+      .addCase(fetchCurrentUser.rejected, (state) => {
+        state.status = "idle";
+        router.navigate("/");
+
       });
   },
 });
+export const { logout } = accountSlice.actions;

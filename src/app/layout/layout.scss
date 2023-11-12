@@ -19,5 +19,23 @@ nav {
     border-radius: 50%;
     object-fit: cover;
     margin-left: auto;
+    cursor: pointer;
+  }
+}
+.logout-dropdown {
+  width: 184px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  box-shadow: 0px 8px 32px 0px rgba(17, 18, 20, 0.16);
+  cursor: pointer;
+  p {
+    padding: 12px 123px 12px 16px;
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 600;
+    color: $gray900;
+    
   }
 }

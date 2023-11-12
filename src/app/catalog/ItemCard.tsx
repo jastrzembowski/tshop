@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Item } from "../../models/item";
 import Dialog from "@mui/material/Dialog";
-import { Rating } from "@mui/material";
+import { Backdrop, Rating } from "@mui/material";
 
 interface Props {
   product: Item;
@@ -41,7 +41,14 @@ export default function ItemCard({ product }: Props) {
           Show details
         </button>
       </div>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        slots={{
+          backdrop: (props) => (
+            <Backdrop {...props} style={{ backgroundColor: "rgba(26, 27, 29, 0.9)" }} />
+          ),
+        }}      >
         <div className="item-info">
           <img src={product.image} alt={product.name}></img>
           <h1>{product.name}</h1>

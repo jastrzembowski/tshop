@@ -6,7 +6,7 @@ import {
 } from "../../api/catalogSlice";
 import { useAppDispatch, useAppSelector } from "../../api/configureStore";
 import ItemCard from "./ItemCard";
-import "./main.scss";
+import "./catalog.scss";
 import { Grid } from "@mui/material";
 import AppPagination from "../components/AppPagination";
 import NoItemsError from "../components/NoItemsError";

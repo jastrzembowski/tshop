@@ -1,11 +1,11 @@
 import Layout from "./app/layout/Layout";
-import Main from "./app/main/Main";
+import Catalog from "./app/catalog/Catalog";
 
 function App() {
   return (
     <>
       <Layout />
-      <Main />
+      <Catalog />
     </>
   );
 }
