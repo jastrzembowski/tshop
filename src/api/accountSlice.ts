@@ -64,7 +64,8 @@ export const accountSlice = createSlice({
   initialState: initialState,
   reducers: {
     logout: (state) => {
-      (state.user = null), localStorage.removeItem("user");
+      (state.user = null), 
+      localStorage.removeItem("token");
       router.navigate("/");
     },
   },
@@ -91,8 +92,7 @@ export const accountSlice = createSlice({
       })
       .addCase(fetchCurrentUser.rejected, (state) => {
         state.status = "idle";
-        router.navigate("/");
-
+        // router.navigate("/");
       });
   },
 });

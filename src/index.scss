@@ -1,8 +1,13 @@
-@import url("./styles/variables.scss");
+@import "./styles/variables.scss";
+@import "./styles/mixins.scss";
+
 body{
   margin: 0px;
 }
 body> * {
   font-family: "Nunito Sans", sans-serif;
 
+}
+h1,h2,p,a{
+  font-weight: 600;
 }

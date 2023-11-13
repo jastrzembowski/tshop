@@ -1,7 +1,7 @@
 import { Dialog, FormGroup, SxProps } from "@mui/material";
 import "./layout.scss";
 import SearchComponent from "../components/SearchComponent";
-import AppCheckbox from "../components/AppCheckbox";
+import AppCheckbox from "../components/checkbox/AppCheckbox";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../api/configureStore";
 import { useEffect, useState } from "react";
@@ -26,8 +26,8 @@ export default function Layout() {
   };
 
   const handleLogout = () => {
-    dispatch(logout())
-  }
+    dispatch(logout());
+  };
 
   const sx: SxProps = {
     "& .MuiDialog-paper": {
@@ -47,12 +47,20 @@ export default function Layout() {
       >
         <AppCheckbox />
       </FormGroup>
-      <img src={user?.avatar} alt="avatar" onClick={handleClickOpen}></img>
-      <Dialog open={open} onClose={handleClose} hideBackdrop sx={sx}>
-        <div className="logout-dropdown" onClick={handleLogout}>
-          <p>Logout</p>
-        </div>
-      </Dialog>
+      {user ? (
+        <>
+          <img src={user?.avatar} alt="avatar" onClick={handleClickOpen}></img>
+          <Dialog open={open} onClose={handleClose} hideBackdrop sx={sx}>
+            <div className="logout-dropdown" onClick={handleLogout}>
+              <p>Logout</p>
+            </div>
+          </Dialog>
+        </>
+      ) : (
+        <>
+          <Link to="/" className="login-button">Log in</Link>
+        </>
+      )}
     </nav>
   );
 }

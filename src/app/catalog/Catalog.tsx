@@ -1,14 +1,13 @@
 import { useEffect } from "react";
 import {
   fetchItemsAsync,
-  productSelectors,
-  setPageNumber,
+  productSelectors
 } from "../../api/catalogSlice";
 import { useAppDispatch, useAppSelector } from "../../api/configureStore";
 import ItemCard from "./ItemCard";
 import "./catalog.scss";
 import { Grid } from "@mui/material";
-import AppPagination from "../components/AppPagination";
+import AppPagination from "../components/pagination/AppPagination";
 import NoItemsError from "../components/NoItemsError";
 
 export default function Main() {
@@ -31,14 +30,7 @@ export default function Main() {
               </Grid>
             ))}
           </Grid>
-          {metaData && (
-            <AppPagination
-              metaData={metaData}
-              onPageChange={(page: number) =>
-                dispatch(setPageNumber({ currentPage: page }))
-              }
-            />
-          )}
+          {metaData && <AppPagination metaData={metaData} />}
         </>
       ) : (
         <NoItemsError />

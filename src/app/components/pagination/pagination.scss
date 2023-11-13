@@ -1,0 +1,33 @@
+@import "../../../index.scss";
+
+.pagination-box {
+  display: flex;
+  margin-top: 56px;
+  button {
+    background: transparent;
+    border: none;
+    padding: 2px 8px;
+    cursor: pointer;
+    font-size: $font-sm;
+    font-weight: 600;
+    line-height: 16px;
+    color: $gray900;
+    &:hover {
+      color: $secondary-blue;
+    }
+    &:disabled {
+        color: $gray700;
+        cursor: default;
+    }
+    &:first-of-type{
+        margin: 0px 33px;
+    }
+    &:last-of-type{
+        margin: 0px 33px;
+    }
+   
+  }
+  .active{
+    color: $primary-blue;
+}
+}

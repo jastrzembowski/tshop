@@ -1,0 +1,27 @@
+@import "./variables.scss";
+
+@mixin button {
+  background-color: $primary-blue;
+  border: 0px;
+  border-radius: 4px;
+  color: white;
+  font-size: 14px;
+  line-height: 16px;
+  padding: 11px 87px;
+  cursor: pointer;
+  &:hover {
+    background-color: $secondary-blue;
+  }
+  &:disabled {
+    background-color: $gray700;
+    cursor: default;
+  }
+}
+@mixin text {
+  font-size: 14px;
+  color: $gray700;
+}
+@mixin header {
+  color: $gray900;
+  font-size: 24px;
+}
