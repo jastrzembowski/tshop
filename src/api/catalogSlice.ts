@@ -3,7 +3,7 @@ import {
   createEntityAdapter,
   createSlice,
 } from "@reduxjs/toolkit";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { Item, ItemParams } from "../models/item";
 import { MetaData } from "../models/meta";
 import { RootState } from "./configureStore";
@@ -13,6 +13,8 @@ interface CatalogState {
   status: string;
   itemsLoaded: boolean;
   itemParams: ItemParams;
+  appLoaded: boolean,
+  itemsError: boolean
 }
 
 function initParams() {
@@ -28,6 +30,8 @@ const initialState: CatalogState = {
   status: "idle",
   itemsLoaded: false,
   itemParams: initParams(),
+  appLoaded: false,
+  itemsError: false
 };
 const productsAdapter = createEntityAdapter<Item>();
 
@@ -59,7 +63,8 @@ export const fetchItemsAsync = createAsyncThunk<
     thunkAPI.dispatch(setMetaData(response.data.meta));
     return response.data.items;
   } catch (error) {
-    return thunkAPI.rejectWithValue(error);
+    const err = error as AxiosError;
+    return thunkAPI.rejectWithValue(err.response?.data);
   }
 });
 
@@ -86,15 +91,18 @@ export const catalogSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchItemsAsync.pending, (state) => {
       state.status = "pendingFetchProducts";
+      state.itemsLoaded = false
+      state.itemsError= false
     });
     builder.addCase(fetchItemsAsync.fulfilled, (state, action) => {
       productsAdapter.setAll(state, action.payload);
       state.status = "idle";
       state.itemsLoaded = true;
+      state.appLoaded = true
     });
-    builder.addCase(fetchItemsAsync.rejected, (state, action) => {
-      console.log(action.payload);
+    builder.addCase(fetchItemsAsync.rejected, (state) => {
       state.status = "idle";
+      state.itemsError = true
     });
   },
 });

@@ -2,7 +2,9 @@ import bg from "../../assets/Bitmap.jpg";
 import "./home.scss";
 import Login from "../components/Login";
 
+
 export default function Home() {
+
   return (
     <div className="home-page">
       <img src={bg} alt="join tsh background"></img>

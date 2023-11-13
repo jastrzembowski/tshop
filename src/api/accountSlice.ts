@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { FieldValues } from "react-hook-form";
 import { router } from "../routing/AppRoutes";
 
@@ -10,11 +10,13 @@ interface AccountState {
     avatar: string;
   } | null;
   status: string;
+  loginError: boolean;
 }
 
 const initialState: AccountState = {
   user: null,
   status: "idle",
+  loginError: false,
 };
 
 export const login = createAsyncThunk(
@@ -33,13 +35,14 @@ export const login = createAsyncThunk(
       );
       localStorage.setItem("token", response.data.access_token);
 
-      return response;
+      return response.data.user;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      const err = error as AxiosError;
+      console.log(err.response?.data);
+      return thunkAPI.rejectWithValue(err.response?.data);
     }
   }
 );
-
 export const fetchCurrentUser = createAsyncThunk(
   "account/fetchCurrentUser",
   async (_, thunkAPI) => {
@@ -52,9 +55,11 @@ export const fetchCurrentUser = createAsyncThunk(
           },
         }
       );
-      return user;
+      return user.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      const err = error as AxiosError;
+      console.log(err.response?.data);
+      return thunkAPI.rejectWithValue(err.response?.data);
     }
   }
 );
@@ -64,8 +69,7 @@ export const accountSlice = createSlice({
   initialState: initialState,
   reducers: {
     logout: (state) => {
-      (state.user = null), 
-      localStorage.removeItem("token");
+      (state.user = null), localStorage.removeItem("token");
       router.navigate("/");
     },
   },
@@ -73,26 +77,27 @@ export const accountSlice = createSlice({
     builder
       .addCase(login.pending, (state) => {
         state.status = "pendingLogin";
+        state.loginError = false;
       })
       .addCase(login.fulfilled, (state, action) => {
-        state.user = action.payload.data.user;
+        state.user = action.payload;
         router.navigate("/home");
         state.status = "idle";
       })
       .addCase(login.rejected, (state) => {
         state.status = "idle";
+        state.loginError = true;
       })
       .addCase(fetchCurrentUser.pending, (state) => {
         state.status = "pendingLogin";
       })
       .addCase(fetchCurrentUser.fulfilled, (state, action) => {
-        state.user = action.payload.data;
+        state.user = action.payload;
         router.navigate("/home");
         state.status = "idle";
       })
       .addCase(fetchCurrentUser.rejected, (state) => {
         state.status = "idle";
-        // router.navigate("/");
       });
   },
 });

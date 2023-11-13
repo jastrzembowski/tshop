@@ -16,18 +16,34 @@
       color: $secondary-blue;
     }
     &:disabled {
-        color: $gray700;
-        cursor: default;
+      color: $gray700;
+      cursor: default;
     }
-    &:first-of-type{
-        margin: 0px 33px;
+    &:first-of-type {
+      margin: 0px 33px 0px 0px;
     }
-    &:last-of-type{
-        margin: 0px 33px;
+    &:last-of-type {
+      margin: 0px 0px 0px 33px;
     }
-   
   }
-  .active{
+  .active {
     color: $primary-blue;
+  }
 }
+@media (max-width: 900px) {
+  .pagination-box {
+    margin-top: 40px;
+  }
+}
+@media (max-width: 350px) {
+  .pagination-box {
+    button {
+      &:first-of-type {
+        margin: 0px 13px 0px 0px;
+      }
+      &:last-of-type {
+        margin: 0px 0px 0px 13px;
+      }
+    }
+  }
 }

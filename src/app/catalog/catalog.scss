@@ -34,6 +34,11 @@
       @include text;
       line-height: 16px;
       margin: 8px 16px 16px;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 4;
+      white-space: pre-wrap;
     }
     img {
       height: 170px;
@@ -96,7 +101,7 @@
     position: absolute;
     top: 20px;
     right: 20px;
-    cursor: pointer;    
+    cursor: pointer;
   }
   h1 {
     @include header;
@@ -108,5 +113,28 @@
     line-height: 24px;
     color: $gray700;
     margin: 8px 32px;
+  }
+}
+@media (max-width: 800px) {
+  .items-container {
+    .empty-box {
+      width: 100%;
+      margin-top: 0px;
+    }
+  }
+}
+@media (max-width: 500px) {
+  .items-container {
+    padding: 24px 24px;
+
+  }
+  .item-info{
+    height: 570px;
+    h1{
+      margin: 24px 24px 0px;
+    }
+    p{
+      margin: 8px 24px;
+    }
   }
 }
