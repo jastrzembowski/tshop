@@ -1,0 +1,53 @@
+@import "../../../index.scss";
+
+.checkbox-container {
+  font-size: $font-sm;
+  font-weight: 600;
+  color: $gray900;
+  position: relative;
+  cursor: pointer;
+  margin-right: 32px;
+  display: flex;
+  align-items: center;
+
+  input {
+    appearance: unset;
+    height: 24px;
+    width: 24px;
+    border-radius: 4px;
+    border: 1px solid $gray300;
+    cursor: pointer;
+
+    &:hover {
+      border: 1px solid $gray700;
+    }
+
+    &:checked {
+      background: $primary-blue;
+
+      + .checkmark:after {
+        display: block;
+        width: 16px;
+        height: 16px;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M6.0001 10.7799L3.2201 7.9999L2.27344 8.9399L6.0001 12.6666L14.0001 4.66656L13.0601 3.72656L6.0001 10.7799Z' fill='white'/%3E%3C/svg%3E")
+          center/contain no-repeat;
+      }
+    }
+  }
+
+  .checkmark {
+    &:after {
+      content: "";
+      position: absolute;
+      display: none;
+      left: 8px;
+      top: 7px;
+    }
+  }
+}
+@media (max-width: 900px) {
+  .checkbox-container{
+    margin-bottom: 32px;
+  }
+  
+}

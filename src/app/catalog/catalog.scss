@@ -1,10 +1,12 @@
-@import "../../styles/variables.scss";
+@import "../../index.scss";
 
 .items-container {
   background-color: $gray200;
   padding: 40px 108px;
   min-height: 600px;
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   .item-card {
     display: flex;
     height: 400px;
@@ -13,10 +15,9 @@
     border-radius: 8px;
     position: relative;
     h1 {
-      font-size: 18px;
+      font-size: $font-md;
       line-height: 16px;
       color: $gray900;
-      font-weight: 600;
       margin: 16px 16px 8px;
     }
     h2 {
@@ -24,18 +25,20 @@
       z-index: 2;
       background-color: $orange;
       color: #fff;
-      font-size: 14px;
+      font-size: $font-sm;
       padding: 4px 17px 4px 16px;
-      font-weight: 600;
       top: 16px;
       margin: 0px;
     }
     p {
-      font-size: 14px;
+      @include text;
       line-height: 16px;
-      color: $gray700;
-      font-weight: 600;
       margin: 8px 16px 16px;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 4;
+      white-space: pre-wrap;
     }
     img {
       height: 170px;
@@ -44,22 +47,13 @@
     }
     button {
       margin: auto 16px 24px 16px;
-      background-color: $primary-blue;
-      border: 0px;
-      border-radius: 4px;
-      color: white;
-      font-size: 14px;
-      line-height: 16px;
-      padding: 11px 87px;
-    }
-    .btn-disabled {
-      background-color: $gray700;
+      @include button;
     }
   }
 
   .empty-box {
     background-color: white;
-    max-width: 600px;
+    width: 600px;
     height: 344px;
     display: flex;
     flex-direction: column;
@@ -67,22 +61,80 @@
     justify-content: center;
     margin: auto;
     border-radius: 8px;
-    cursor:default;
+    cursor: default;
     img {
       width: 36px;
       height: 46px;
     }
     h1 {
-      font-size: 18px;
-      font-weight: 600;
+      font-size: $font-md;
       line-height: 16px;
       margin-bottom: 8px;
     }
     p {
-      color: $gray700;
-      font-size: 14px;
-      font-weight: 600;
+      @include text;
       margin: 0px;
+      line-height: 16px;
+    }
+  }
+}
+.item-info {
+  max-width: 600px;
+  min-height: 530px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: $box-shadow;
+  position: relative;
+  img {
+    height: 354px;
+    object-fit: cover;
+    border-radius: 8px 8px 0px 0px;
+  }
+  .close {
+    height: 14px;
+    width: 14px;
+    padding: 5px;
+    object-fit: unset;
+    border-radius: 0px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+  }
+  h1 {
+    @include header;
+    line-height: 40px;
+    margin: 24px 32px 0px;
+  }
+  p {
+    font-size: $font-md;
+    line-height: 24px;
+    color: $gray700;
+    margin: 8px 32px;
+  }
+}
+@media (max-width: 800px) {
+  .items-container {
+    .empty-box {
+      width: 100%;
+      margin-top: 0px;
+    }
+  }
+}
+@media (max-width: 500px) {
+  .items-container {
+    padding: 24px 24px;
+
+  }
+  .item-info{
+    height: 570px;
+    h1{
+      margin: 24px 24px 0px;
+    }
+    p{
+      margin: 8px 24px;
     }
   }
 }

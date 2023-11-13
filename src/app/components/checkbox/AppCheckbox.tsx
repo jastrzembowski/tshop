@@ -1,7 +1,8 @@
-import { FormControlLabel, Checkbox } from "@mui/material";
-import { useAppDispatch } from "../../api/configureStore";
-import { setProductParams } from "../../api/catalogSlice";
+import { useAppDispatch } from "../../../api/configureStore";
+import { setProductParams } from "../../../api/catalogSlice";
 import { useState } from "react";
+import "./checkbox.scss";
+
 
 export default function AppCheckbox() {
   const [promoChecked, setPromoChecked] = useState(false);
@@ -20,18 +21,24 @@ export default function AppCheckbox() {
   };
   return (
     <>
-      <FormControlLabel
-        control={
-          <Checkbox checked={activeChecked} onChange={handleActiveChange} />
-        }
-        label="Active"
-      />
-      <FormControlLabel
-        control={
-          <Checkbox checked={promoChecked} onChange={handlePromoChange} />
-        }
-        label="Promo"
-      />
+      <label className="checkbox-container">
+        <input
+          type="checkbox"
+          checked={activeChecked}
+          onChange={handleActiveChange}
+        />
+        <span className="checkmark"></span>
+        Active
+      </label>
+      <label className="checkbox-container">
+        <input
+          type="checkbox"
+          checked={promoChecked}
+          onChange={handlePromoChange}
+        />
+        <span className="checkmark"></span>
+        Promo
+      </label>
     </>
   );
 }

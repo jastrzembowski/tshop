@@ -1,9 +1,14 @@
-import { TextField, debounce } from "@mui/material";
+import { InputAdornment, SxProps, TextField, debounce } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../api/configureStore";
 import { useState } from "react";
 import { setProductParams } from "../../api/catalogSlice";
+import search from "../../assets/search.svg";
 
-export default function SearchComponent() {
+interface Props{
+  sx: SxProps
+}
+
+export default function SearchComponent({sx}: Props) {
   const { itemParams } = useAppSelector((state) => state.catalog);
   const dispatch = useAppDispatch();
 
@@ -13,20 +18,25 @@ export default function SearchComponent() {
     dispatch(setProductParams({ searchString: event.target.value }));
   }, 1000);
 
+  
+
   return (
     <TextField
-      label="Search"
+      label={searchTerm === "" ? "Search" : ""}
       variant="outlined"
       value={searchTerm || ""}
       onChange={(event) => {
         setSearchTerm(event.target.value);
         debouncedSearch(event);
       }}
-      sx={{
-        width: "392px",
-        height: "48px",
-        margin: "0px 20px 0px 108px",
-        fontSize: "14px",
+      InputLabelProps={{ shrink: false }}
+      sx={sx}
+      InputProps={{
+        endAdornment: (
+          <InputAdornment position="end">
+            <img src={search} alt="search" className="search-icon"></img>
+          </InputAdornment>
+        ),
       }}
     />
   );

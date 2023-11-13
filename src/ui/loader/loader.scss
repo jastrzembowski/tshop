@@ -1,0 +1,19 @@
+@import "../../index.scss";
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.loader {
+  border: 3px solid $gray100;
+  border-top: 3px solid $primary-blue;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  margin: auto;
+  animation: spin 1s linear infinite;
+}
