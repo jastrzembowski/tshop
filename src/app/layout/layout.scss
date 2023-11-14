@@ -31,6 +31,7 @@ nav {
       border-radius: 4px;
       color: $primary-blue;
       margin-left: auto;
+      min-width: 40px;
       &:hover {
         border: 1px solid $secondary-blue;
         color: $secondary-blue;
