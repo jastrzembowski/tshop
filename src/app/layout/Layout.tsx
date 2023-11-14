@@ -76,7 +76,7 @@ export default function Layout() {
   return (
     <nav>
       <div className="nav-row-container">
-        <Link to="/home">join.tsh.io</Link>
+        <Link to="/">join.tsh.io</Link>
         <SearchComponent sx={desktopsx}/>
         <FormGroup sx={formsx}>
           <AppCheckbox />
