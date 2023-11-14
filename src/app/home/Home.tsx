@@ -1,6 +1,7 @@
 import bg from "../../assets/Bitmap.jpg";
 import "./home.scss";
 import Login from "../components/Login";
+import { Link } from "react-router-dom";
 
 
 export default function Home() {
@@ -9,7 +10,7 @@ export default function Home() {
     <div className="home-page">
       <img src={bg} alt="join tsh background"></img>
       <div className="login-container">
-        <h1>join.tsh.io</h1>
+        <Link to="/home">join.tsh.io</Link>
         <Login />
       </div>
     </div>
