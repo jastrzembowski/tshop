@@ -1,7 +1,7 @@
 
 # TSH SHOP
 
-Application made according to the design delivered by TSH recruitment team, created for purpose of recruitment in this company.
+Application made according to the design delivered by TSH
 
 ## Installation
 
